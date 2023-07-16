@@ -1,0 +1,1 @@
+# flask-sqlite-crud-with-file-img-project
