@@ -1,0 +1,44 @@
+{%  extends 'layout.html' %}
+{% block body %}
+    <div class='row'>
+        <div class='col-5 mx-auto'>
+            <h3>Edit User</h3><hr>
+            <form method='post' action='{{url_for("update",id=datas.id)}}' enctype='multipart/form-data'>
+                <div class='form-group'>
+                    <label>Name</label>
+                    <input type='text' value='{{datas.name}}' class='form-control' name='name' required>
+                </div>
+                <div class='form-group'>
+                    <label>Contact</label>
+                    <input type='text' value='{{datas.contact}}' class='form-control' name='contact' required>
+                </div>
+                <div class='form-group'>
+                    <label>Photo</label>
+                    <input type='file' class='form-control' name='file' onchange="previewFile(this);" >
+                </div>
+                <br>
+                <div class='form-group'>
+                    <img id="previewImg" src="/static/uploads/{{ datas['filename'] }}" alt="Placeholder" width="100" height="100">
+                </div>
+                <br>
+                <input type='submit'  value='Update' class='btn btn-primary'>
+            </form>
+        </div>
+    </div>
+    <script src="https://code.jquery.com/jquery-3.4.1.slim.min.js" integrity="sha256-pasqAKBDmFT4eHoN2ndd6lN370kFiGUFyTiUHWhU7k8=" crossorigin="anonymous"></script>
+	<script>
+	    function previewFile(input){
+            var file = $("input[type=file]").get(0).files[0];
+     
+            if(file){
+                var reader = new FileReader();
+     
+                reader.onload = function(){
+                    $("#previewImg").attr("src", reader.result);
+                }
+     
+                reader.readAsDataURL(file);
+            }
+        }
+	</script>
+{% endblock %}
